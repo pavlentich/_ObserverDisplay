@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6"
+  xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  IgnorableNamespaces="uap mp uap6 iot uap3">
+
+  <Identity
+    Name="a6373cf5-7931-4197-b0c4-ab8a30e7e76f"
+    Publisher="CN=pavlentich"
+    Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="a6373cf5-7931-4197-b0c4-ab8a30e7e76f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>ObserverDisplay</DisplayName>
+    <PublisherDisplayName>pavlentich</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="ObserverDisplay.App">
+      <uap:VisualElements
+        DisplayName="ObserverDisplay"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png"
+        Description="ObserverDisplay"
+        BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <Capability Name="internetClientServer"/>
+    <uap6:Capability Name="graphicsCapture"/>
+    <iot:Capability Name="lowLevelDevices"/>
+    <uap3:Capability Name="remoteSystem"/>
+    <iot:Capability Name="systemManagement"/>
+    <uap3:Capability Name="backgroundMediaPlayback"/>
+    <DeviceCapability Name="lowLevel"/>
+  </Capabilities>
+</Package>

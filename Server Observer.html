@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observer Display</title>
+</head>
+<body>
+    <h1>Observer Display</h1>
+    <button id="helloButton">HELLO</button>
+    <button id="resetButton">Reset Timer</button>
+    <button id="stopResetButton">Stop/Reset Counter</button>
+    <div id="counterRichTextBlock" style="font-size: 16px; text-align: center;"></div>
+
+    <script>
+        // Function to make an HTTP request
+        async function sendRequest(command) {
+            try {
+                const response = await fetch('http://localhost:12345', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: command
+                });
+                const data = await response.text();
+                return data;
+            } catch (error) {
+                console.error('Error sending request:', error);
+                return null;
+            }
+        }
+
+        // Event listener for HELLO button
+        document.getElementById('helloButton').addEventListener('click', async () => {
+            const response = await sendRequest('HELLO');
+            if (response) {
+                console.log('Response from server:', response);
+            }
+        });
+
+        // Event listener for Reset Timer button
+        document.getElementById('resetButton').addEventListener('click', async () => {
+            const response = await sendRequest('RESET');
+            if (response) {
+                console.log('Response from server:', response);
+            }
+        });
+
+        // Event listener for Stop/Reset Counter button
+        document.getElementById('stopResetButton').addEventListener('click', async () => {
+            const response = await sendRequest('STOP');
+            if (response) {
+                console.log('Response from server:', response);
+            }
+        });
+
+        // Function to update counter display
+        function updateCounter(data) {
+            const counterElement = document.getElementById('counterRichTextBlock');
+            counterElement.innerText = `Counter: ${data.CounterValue}, TimeMark: ${data.TimeMark}`;
+        }
+
+        // Function to periodically fetch data from server
+        async function fetchData() {
+            try {
+                const response = await fetch('http://localhost:12345');
+                const data = await response.json();
+                updateCounter(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Fetch data initially
+        fetchData();
+
+        // Fetch data every 4 seconds
+        setInterval(fetchData, 4000);
+    </script>
+</body>
+</html>
